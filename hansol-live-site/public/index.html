@@ -4,14 +4,277 @@
 :root{--ink:#172e4b;--blue:#316cba;--muted:#63758b;--line:#dce7f2;--pale:#eef6ff}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:#fcfdff;color:var(--ink);font-family:'Noto Sans KR',sans-serif;word-break:keep-all}a{color:inherit;text-decoration:none}button{font:inherit}a:focus-visible,button:focus-visible{outline:3px solid #377ad2;outline-offset:5px}.wrap{width:min(1180px,calc(100% - 80px));margin:auto}header{position:sticky;top:0;z-index:20;background:#fcfdfff0;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}nav{height:86px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800;letter-spacing:-1px;font-size:22px}.brand i{display:inline-block;width:11px;height:11px;background:#80b5ed;border-radius:50%;margin-right:10px}.navlinks{display:flex;gap:35px;font-size:13px}.navlinks a.active{color:var(--blue)}.navlinks span{color:#8a9aad;margin-right:6px;font-size:10px}.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 84% 40%,#d7eaff 0,transparent 55%),linear-gradient(140deg,#fff,#f0f7ff);padding:100px 0 70px}.hero-grid{display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:35px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--blue);font-weight:700;display:flex;align-items:center;gap:10px}.eyebrow:before{content:'';width:24px;height:1px;background:var(--blue)}h1{font-size:clamp(40px,4.5vw,63px);line-height:1.35;letter-spacing:-3px;margin:25px 0}h1 em{font-style:normal;color:var(--blue)}.intro{color:var(--muted);font-size:15px;line-height:1.95;max-width:460px}.name{font-weight:700;color:var(--ink);margin-top:25px}.name span{font-size:12px;font-weight:400;margin-left:15px;color:var(--muted)}.actions{display:flex;gap:12px;margin-top:34px}.btn{padding:15px 22px;border:1px solid #ccdcec;border-radius:8px;font-size:13px;display:inline-flex;gap:30px;align-items:center;transition:.2s}.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px #1c528415}.primary{color:white;background:var(--ink);border-color:var(--ink)}.art{position:relative;height:420px;display:grid;place-items:center}.art svg{width:100%;height:100%;filter:drop-shadow(0 24px 34px #689cd130)}.art-label{position:absolute;padding:11px 17px;background:#ffffffb8;border:1px solid white;backdrop-filter:blur(8px);border-radius:8px;font-size:11px;letter-spacing:.5px;box-shadow:0 8px 28px #7694b115}.l1{top:40px;right:15px}.l2{bottom:45px;left:10px}.art-label b{display:block;color:var(--blue);margin-bottom:4px}.hero-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #d3e2f0;margin-top:60px;padding-top:23px;font-size:10px;letter-spacing:1.6px;color:var(--muted)}.tags{display:flex;gap:20px;letter-spacing:0}.section{padding:100px 0}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:46px}.section-heading h2{font-size:34px;line-height:1.45;letter-spacing:-1.5px;margin:14px 0 0}.section-heading p{font-size:13px;line-height:1.9;color:var(--muted);max-width:350px;margin:0}.featured{display:grid;grid-template-columns:1.25fr 1fr;gap:24px}.feature{padding:36px;border:1px solid var(--line);border-radius:14px;background:var(--pale);position:relative;overflow:hidden}.feature.white{background:white}.small-label{font-size:11px;letter-spacing:1px;color:var(--blue);font-weight:600}.feature h3{font-size:25px;letter-spacing:-1px;margin:18px 0 12px}.feature p{font-size:13px;line-height:1.9;color:var(--muted);max-width:390px}.date{display:inline-block;font-size:11px;color:var(--blue);border:1px solid #cadaec;border-radius:30px;padding:5px 11px;margin-top:14px}.feature-icon{position:absolute;right:25px;top:27px;color:#96bde6;font-size:32px}.subhead{display:flex;align-items:center;gap:15px;font-size:17px;margin:55px 0 25px}.subhead:after{content:'';height:1px;background:var(--line);flex:1}.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.role{border:1px solid var(--line);border-radius:10px;padding:25px 22px;background:white}.role .num{font-size:11px;color:#85a4c6}.role h4{font-size:15px;line-height:1.7;margin:17px 0 12px}.status{font-size:10px;color:var(--blue)}.status:before{content:'';display:inline-block;height:5px;width:5px;border-radius:50%;background:#6caae9;margin-right:7px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:65px;margin-top:48px}.detail-grid h3{font-size:18px;margin-bottom:8px}.row{display:grid;grid-template-columns:100px 1fr;gap:18px;padding:23px 0;border-bottom:1px solid var(--line)}.row .period{font-size:11px;color:var(--blue);padding-top:4px}.row strong{font-size:14px;font-weight:600;display:block}.row p{font-size:12px;line-height:1.8;color:var(--muted);margin:7px 0 0}.education{margin-top:50px;background:#f4f8fc;border-radius:12px;padding:30px 35px;display:grid;grid-template-columns:.65fr 1fr 1fr;gap:20px;align-items:center}.education h3{font-size:17px;margin:0}.education p{font-size:12px;color:var(--muted);line-height:1.8;margin:7px 0 0}.education strong{font-size:14px}.degree{color:var(--blue);font-size:10px;letter-spacing:1px;display:block;margin-bottom:9px}.award{margin-top:24px;border:1px solid #d4e3f3;border-radius:12px;padding:28px 35px;display:flex;gap:23px;align-items:center;background:linear-gradient(100deg,#e7f2ff,#fafcff)}.award-symbol{font-size:32px;color:#6a99ce}.award strong{font-size:15px}.award p{font-size:12px;color:var(--muted);margin:7px 0 0}.award time{margin-left:auto;color:var(--blue);font-size:22px;font-weight:600}.contact{background:#eaf3ff;border-top:1px solid #dce9f8;padding:85px 0}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.contact h2{font-size:36px;letter-spacing:-1.5px;margin:18px 0}.contact p{font-size:13px;color:var(--muted);line-height:1.9}.contact-link{display:flex;align-items:center;justify-content:space-between;padding:23px 0;border-bottom:1px solid #cddcec}.contact-link small{font-size:10px;letter-spacing:1px;color:var(--muted);display:block;margin-bottom:9px}.contact-link strong{font-size:clamp(16px,2vw,22px);font-weight:500}.contact-link:hover{color:var(--blue)}footer{padding:26px 0;background:#eaf3ff;font-size:10px;color:var(--muted)}.footer-inner{display:flex;justify-content:space-between;border-top:1px solid #cddcec;padding-top:24px}.copy{border:0;background:transparent;color:var(--blue);font-size:11px;cursor:pointer;padding:10px 0}.notice{font-size:11px;color:var(--blue);min-height:18px}.orb{transform-origin:260px 215px;animation:float 8s ease-in-out infinite}@keyframes float{50%{transform:translateY(-9px) rotate(3deg)}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orb{animation:none}.btn{transition:none}}@media(max-width:760px){.wrap{width:calc(100% - 40px)}nav{height:70px}.brand{font-size:19px}.navlinks{gap:16px;font-size:11px}.navlinks span{display:none}.hero{padding:65px 0 35px}.hero-grid{grid-template-columns:1fr;gap:15px}h1{letter-spacing:-2px}.art{height:310px;max-width:430px;width:100%;margin:auto}.hero-bottom{margin-top:25px}.tags{gap:10px}.section{padding:65px 0}.section-heading{display:block}.section-heading p{margin-top:18px}.featured,.detail-grid,.contact-grid{grid-template-columns:1fr}.roles{grid-template-columns:1fr 1fr}.feature{padding:28px}.detail-grid{gap:25px}.education{grid-template-columns:1fr;padding:28px;gap:25px}.award{padding:25px 22px;gap:15px}.award time{font-size:17px}.contact{padding:60px 0}.contact-grid{gap:25px}.footer-inner{gap:20px;font-size:9px}.row{grid-template-columns:85px 1fr}.section-heading h2{font-size:29px}}@media(max-width:390px){.navlinks{gap:10px}.roles{grid-template-columns:1fr}.tags{font-size:9px}.hero-bottom{letter-spacing:.4px}}
 
 .hero-portrait{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 18px 26px #7d9fc526)}[data-edit]{white-space:pre-line}.editor-dialog{border:1px solid #dce7f2;border-radius:18px;padding:28px;width:min(700px,calc(100% - 32px));max-height:88vh;color:#172e4b;box-shadow:0 30px 100px #122d4c35}.editor-dialog::backdrop{background:#11294380;backdrop-filter:blur(5px)}.editor-dialog h2{font-size:23px;margin:0}.dialog-top{display:flex;align-items:center;justify-content:space-between;gap:18px}.close-dialog{border:0;background:#eef6ff;border-radius:50%;width:35px;height:35px;cursor:pointer}.editor-dialog p{font-size:13px;color:#63758b;line-height:1.8}.editor-dialog label{display:block;font-size:12px;margin:18px 0 8px;font-weight:600}.editor-dialog input,.editor-dialog textarea{width:100%;padding:12px;border:1px solid #ccdcec;border-radius:8px;font:inherit;font-size:13px;background:#fbfdff;color:#172e4b}.editor-dialog textarea{resize:vertical;min-height:72px}.editor-fields{max-height:48vh;overflow:auto;padding:0 12px 12px 0}.editor-fields h3{color:#316cba;border-top:1px solid #dce7f2;padding-top:20px;font-size:16px}.editor-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.editor-actions button{cursor:pointer}.admin-message{font-size:12px;min-height:22px;margin-top:15px;line-height:1.7}#login-form .btn{margin-top:18px}#editor-view[hidden],#login-view[hidden]{display:none}.art-label{pointer-events:none}
-</style><link rel="manifest" href="app.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="고한솔"><style>.app-nav{display:none}@media(max-width:760px){body{padding-bottom:78px}.app-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:21;justify-content:space-around;background:#fffffff2;backdrop-filter:blur(12px);border-top:1px solid #dce7f2;padding:12px 12px calc(12px + env(safe-area-inset-bottom))}.app-nav a{display:flex;flex-direction:column;align-items:center;gap:5px;color:#63758b;font-size:11px;padding:0 25px}.app-nav a.active{color:#316cba;font-weight:700}.app-nav b{font-size:20px;font-weight:500}.art-label.l1{right:0;top:5px}.art-label.l2{bottom:5px;left:0}}</style></head><body>
-<header><nav class="wrap" aria-label="주 메뉴"><a class="brand" href="#about"><i></i>고한솔<span style="font-size:11px;color:#7c94ad;margin-left:10px;font-weight:500;letter-spacing:1px">HANSOL KO</span></a><div class="navlinks"><a href="#about"><span>01</span>About</a><a href="#project"><span>02</span>Project</a><a href="#contact"><span>03</span>Contact ↗</a></div></nav></header>
-<nav class="app-nav" aria-label="모바일 탐색"><a href="#about"><b aria-hidden="true">◉</b>소개</a><a href="#project"><b aria-hidden="true">▦</b>프로젝트</a><a href="#contact"><b aria-hidden="true">✉</b>연락</a></nav><main><section id="about" class="hero"><div class="wrap"><div class="hero-grid"><div><div class="eyebrow">AI EDUCATOR · CONNECTING POSSIBILITIES</div><h1>AI는 세상과 소통하는<br><em>새로운 도구다!</em></h1><p class="intro">기술의 가능성을 배움의 경험으로 연결합니다.<br>교실에서 시작하는 변화, 사람을 향하는 AI 교육.<br>더 넓은 세상과 만나는 배움을 만들어갑니다.</p><div class="name">고한솔 <span>단포초등학교 교사 · AI 교육 전문가</span></div><div class="actions"><a class="btn primary" href="#project">교육의 발자취 살펴보기 <span>↘</span></a><a class="btn" href="#contact">함께하기 <span>↗</span></a></div></div><div class="art"><img class="hero-portrait" src="hero-character.png" alt="태블릿을 들고 미소 짓는 20대 남성 캐릭터 일러스트"><div class="art-label l1"><b>HUMAN × TECHNOLOGY</b>사람과 기술을 잇는 교육</div><div class="art-label l2"><b>NEW POSSIBILITIES</b>배움의 새로운 가능성</div></div></div><div class="hero-bottom"><span>SCROLL TO EXPLORE ↓</span><div class="tags"><span>AI 교육</span><span>교육과정 설계</span><span>디지털 혁신</span></div></div></div></section>
+
+.history-add,.history-edit{border:1px solid #cadaec;background:#fff;color:#316cba;border-radius:8px;padding:10px 15px;cursor:pointer;font:inherit;font-size:12px}.history-add:hover,.history-edit:hover{background:#eef6ff}.history-add{margin:14px 0;min-height:44px}.featured>.history-add,.roles>.history-add{grid-column:1/-1;justify-self:start}.education>.history-add{grid-column:1/-1;justify-self:start}.history-controls{margin-top:14px}.row .history-controls{grid-column:2}.award{flex-wrap:wrap}.award .history-controls{margin-left:auto}.history-notice{color:#316cba;font-size:13px;margin-top:18px}.history-controls button{min-height:36px}[data-edit],.role h4,.row strong,.row p,.feature p,.education p{white-space:pre-line}
+</style><link rel="manifest" href="app.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="고한솔"><style>.app-nav{display:none}@media(max-width:760px){body{padding-bottom:78px}.app-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:21;justify-content:space-around;background:#fffffff2;backdrop-filter:blur(12px);border-top:1px solid #dce7f2;padding:12px 12px calc(12px + env(safe-area-inset-bottom))}.app-nav a{display:flex;flex-direction:column;align-items:center;gap:5px;color:#63758b;font-size:11px;padding:0 25px}.app-nav a.active{color:#316cba;font-weight:700}.app-nav b{font-size:20px;font-weight:500}.art-label.l1{right:0;top:5px}.art-label.l2{bottom:5px;left:0}}</style><style>.webapps-section{background:linear-gradient(160deg,#f0f7ff,#fff);border-top:1px solid var(--line)}.webapp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:28px}.webapp-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;padding-bottom:20px}.webapp-card a{display:block}.webapp-card img{display:block;width:100%;height:190px;object-fit:cover;background:#eef6ff}.webapp-card h3{font-size:19px;line-height:1.5;margin:22px 22px 12px;overflow-wrap:anywhere}.webapp-launch{display:block;color:var(--blue);font-size:13px;margin:0 22px 20px}.webapp-card>.history-edit{margin-left:22px}.webapp-empty{grid-column:1/-1;padding:48px 24px;border:1px dashed #cadaec;border-radius:14px;color:var(--muted);text-align:center}.webapp-preview{display:block;max-width:100%;max-height:220px;margin-top:18px;border-radius:10px}.webapp-preview[hidden]{display:none}.navlinks{gap:22px}@media(max-width:760px){.webapp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.navlinks{gap:10px}.app-nav a{padding:0 12px}}@media(max-width:480px){.webapp-grid{grid-template-columns:1fr}.navlinks{font-size:10px;gap:9px}.brand{font-size:17px}}</style></head><body>
+<header><nav class="wrap" aria-label="주 메뉴"><a class="brand" href="#about"><i></i>고한솔<span style="font-size:11px;color:#7c94ad;margin-left:10px;font-weight:500;letter-spacing:1px">HANSOL KO</span></a><div class="navlinks"><a href="#about"><span>01</span>About</a><a href="#project"><span>02</span>Project</a><a href="#contact"><span>03</span>Contact ↗</a><a href="#webapps"><span>04</span>Web Apps</a></div></nav></header>
+<nav class="app-nav" aria-label="모바일 탐색"><a href="#about"><b aria-hidden="true">◉</b>소개</a><a href="#project"><b aria-hidden="true">▦</b>프로젝트</a><a href="#contact"><b aria-hidden="true">✉</b>연락</a><a href="#webapps"><b aria-hidden="true">▦</b>웹앱</a></nav><main><section id="about" class="hero"><div class="wrap"><div class="hero-grid"><div><div class="eyebrow">AI EDUCATOR · CONNECTING POSSIBILITIES</div><h1>AI는 세상과 소통하는<br><em>새로운 도구다!</em></h1><p class="intro">기술의 가능성을 배움의 경험으로 연결합니다.<br>교실에서 시작하는 변화, 사람을 향하는 AI 교육.<br>더 넓은 세상과 만나는 배움을 만들어갑니다.</p><div class="name">고한솔 <span>단포초등학교 교사 · AI 교육 전문가</span></div><div class="actions"><a class="btn primary" href="#project">교육의 발자취 살펴보기 <span>↘</span></a><a class="btn" href="#contact">함께하기 <span>↗</span></a></div></div><div class="art"><img class="hero-portrait" src="hero-character.png" alt="태블릿을 들고 미소 짓는 20대 남성 캐릭터 일러스트"><div class="art-label l1"><b>HUMAN × TECHNOLOGY</b>사람과 기술을 잇는 교육</div><div class="art-label l2"><b>NEW POSSIBILITIES</b>배움의 새로운 가능성</div></div></div><div class="hero-bottom"><span>SCROLL TO EXPLORE ↓</span><div class="tags"><span>AI 교육</span><span>교육과정 설계</span><span>디지털 혁신</span></div></div></div></section>
 <section id="project" class="section"><div class="wrap"><div class="section-heading"><div><div class="eyebrow">02 / PROJECT & EXPERIENCE</div><h2>배움의 변화를 만드는<br>경험과 실천.</h2></div><p>교육과정 설계부터 AI·디지털 교육, 교원 연수까지.<br>학교와 교육 현장을 연결하며 쌓아온 발자취입니다.</p></div>
 <div class="featured"><article class="feature"><span class="small-label">DIGITAL INNOVATION</span><span class="feature-icon" aria-hidden="true">✳</span><h3>AI·디지털 선도학교</h3><p>디지털 온(溫) 선도학교 및 AI·디지털 활용 선도학교의 주무 교사로서 실무를 총괄합니다.</p><span class="date">2024–2026 · 선도학교 주무 교사</span></article><article class="feature white"><span class="small-label">CURRICULUM DESIGN</span><span class="feature-icon" aria-hidden="true">⌘</span><h3>학교 교육과정의 설계와 실행</h3><p>학교 교육과정의 계획·분석·실행·평가를 총괄하며 교육 현장의 변화를 이끌어왔습니다.</p><span class="date">3년 · 교육연구부장 교사</span></article></div>
 <h3 class="subhead">AI·디지털 선도 교원 활동</h3><div class="roles"><article class="role"><span class="num">01 / NETWORK</span><h4>T.O.U.C.H<br>교사단</h4><span class="status">현재 활동</span></article><article class="role"><span class="num">02 / EXPERTISE</span><h4>AIEDAP<br>마스터교원</h4><span class="status">현재 활동</span></article><article class="role"><span class="num">03 / PRACTICE</span><h4>인공지능(AI) 활용<br>선도교사</h4><span class="status">현재 활동</span></article><article class="role"><span class="num">04 / LEARNING</span><h4>경북AI배움터<br>선도교사 및 강사</h4><span class="status">현재 활동</span></article></div>
 <div class="detail-grid"><div><h3>강의와 다음 세대의 성장</h3><div class="row"><span class="period">2024–2026</span><div><strong>영천교육지원청 영재교육원 강사</strong><p>중등 융합-AI 과정 담당</p></div></div><div class="row"><span class="period">2024–2025</span><div><strong>교육실습생 전담 지도교사</strong><p>농어촌 교육실습 지도교사 역임</p></div></div><div class="row"><span class="period">2024</span><div><strong>대구교육대학교 예비교사 멘토</strong><p>‘경북교육과의 따뜻한 동행’ 멘토</p></div></div><div class="row"><span class="period">현재</span><div><strong>교육 현장과 만나는 전문 강의</strong><p>찾아가는 학교 컨설팅, 전국과학교육포럼 등 전문 강사 활동</p></div></div></div><div><h3>교육 공동체를 위한 참여</h3><div class="row"><span class="period">2024–2025</span><div><strong>학교폭력대책심의위원회</strong><p>영천교육지원청 학교폭력대책심의위원회<br>1소위원회 위원장 역임</p></div></div><div class="row"><span class="period">현재</span><div><strong>통일교육위원회</strong><p>위원 활동</p></div></div><div style="padding:28px 0;color:#7293b6;font-size:22px;line-height:1.7;letter-spacing:-.8px">기술을 이해하는 교사,<br>사람을 생각하는 교육.</div></div></div>
 <div class="education"><h3>배움의 기반</h3><div><span class="degree">MASTER’S DEGREE · 석사</span><strong>대구교육대학교 교육대학원</strong><p>AI교육전공</p></div><div><span class="degree">BACHELOR’S DEGREE · 학사</span><strong>부산교육대학교</strong><p>초등(사회)교육전공</p></div></div><div class="award"><span class="award-symbol" aria-hidden="true">✧</span><div><span class="small-label" style="display:block;margin-bottom:8px">AWARD & RECOGNITION</span><strong>제44회 스승의 날 유공 교원 교육감 표창</strong><p>교육혁신분야</p></div><time datetime="2025">2025</time></div></div></section>
-<section id="contact" class="contact"><div class="wrap contact-grid"><div><div class="eyebrow">03 / CONTACT</div><h2>새로운 배움의 시작,<br>함께 이야기해요.</h2><p>AI·디지털 교육 강의, 학교 컨설팅, 교육 협업 등<br>배움의 가능성을 넓히는 만남을 기다립니다.</p></div><div><a class="contact-link" href="mailto:khsol9467@naver.com"><div><small>EMAIL</small><strong>khsol9467@naver.com</strong></div><span>↗</span></a><button class="copy" type="button">이메일 주소 복사 ⧉</button><div class="notice" role="status" aria-live="polite"></div></div></div></section></main><footer><div class="wrap footer-inner"><span>© 2026 고한솔. All rights reserved.</span><button id="admin-open" class="copy" type="button">관리자 편집</button></div></footer><script>
+<section id="contact" class="contact"><div class="wrap contact-grid"><div><div class="eyebrow">03 / CONTACT</div><h2>새로운 배움의 시작,<br>함께 이야기해요.</h2><p>AI·디지털 교육 강의, 학교 컨설팅, 교육 협업 등<br>배움의 가능성을 넓히는 만남을 기다립니다.</p></div><div><a class="contact-link" href="mailto:khsol9467@naver.com"><div><small>EMAIL</small><strong>khsol9467@naver.com</strong></div><span>↗</span></a><button class="copy" type="button">이메일 주소 복사 ⧉</button><div class="notice" role="status" aria-live="polite"></div></div></div></section><section id="webapps" class="section webapps-section"><div class="wrap"><div class="section-heading"><div><div class="eyebrow">04 / VIBE CODING WEB APPS</div><h2>함께 쓰는 바이브코딩 웹앱</h2></div><p>수업과 학교 생활을 위해 만든 웹앱을 나눕니다.<br>마음에 드는 도구를 골라 바로 사용해 보세요.</p></div><button type="button" id="webapp-add" class="btn primary">+ 웹앱 추가하기</button><div id="webapp-grid" class="webapp-grid"></div><p id="webapp-status" class="notice" role="status" aria-live="polite"></p></div></section>
+</main><footer><div class="wrap footer-inner"><span>© 2026 고한솔. All rights reserved.</span><button id="admin-open" class="copy" type="button">관리자 편집</button></div></footer><script>
 const links=[...document.querySelectorAll('.navlinks a,.app-nav a')];const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)links.forEach(a=>{const on=a.hash==='#'+e.target.id;a.classList.toggle('active',on);if(on)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})})},{rootMargin:'-15% 0px -50% 0px'});document.querySelectorAll('main>section').forEach(s=>observer.observe(s));document.querySelector('.copy').addEventListener('click',async()=>{const notice=document.querySelector('.notice');try{await navigator.clipboard.writeText(document.querySelector('.contact-link strong').textContent);notice.textContent='이메일 주소를 복사했습니다.'}catch{notice.textContent='이메일 주소: '+document.querySelector('.contact-link strong').textContent}});
-</script><dialog id="admin-dialog" class="editor-dialog" aria-labelledby="admin-title"><div class="dialog-top"><h2 id="admin-title">홈페이지 편집</h2><button class="close-dialog" type="button" aria-label="편집창 닫기">×</button></div><div id="login-view"><p>관리자 비밀번호로 로그인하세요.</p><form id="login-form"><label for="admin-password">비밀번호</label><input id="admin-password" type="password" autocomplete="current-password" required maxlength="100"><button class="btn primary" type="submit">로그인 ↗</button></form></div><div id="editor-view" hidden><p>소개, 프로젝트, 연락처의 문구를 수정할 수 있습니다.<br>‘사이트에 저장’을 누르면 방문자에게도 변경 내용이 반영됩니다.</p><form id="editor-form"><div class="editor-fields" id="editor-fields"></div><div class="editor-actions"><button class="btn primary" type="submit">사이트에 저장</button><button class="btn" id="admin-logout" type="button">로그아웃</button></div></form></div><div id="admin-message" class="admin-message" role="status" aria-live="polite"></div></dialog><script src="admin.js" defer></script><script>if(location.protocol==='https:'&&'serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script></body></html>
+</script><dialog id="admin-dialog" class="editor-dialog" aria-labelledby="admin-title"><div class="dialog-top"><h2 id="admin-title">홈페이지 편집</h2><button class="close-dialog" type="button" aria-label="편집창 닫기">×</button></div><div id="login-view"><p>관리자 비밀번호로 로그인하세요.</p><form id="login-form"><label for="admin-password">비밀번호</label><input id="admin-password" type="password" autocomplete="current-password" required maxlength="100"><button class="btn primary" type="submit">로그인 ↗</button></form></div><div id="editor-view" hidden><p>소개, 프로젝트, 연락처의 문구를 수정할 수 있습니다.<br>‘사이트에 저장’을 누르면 방문자에게도 변경 내용이 반영됩니다.</p><form id="editor-form"><div class="editor-fields" id="editor-fields"></div><div class="editor-actions"><button class="btn primary" type="submit">사이트에 저장</button><button class="btn" id="admin-logout" type="button">로그아웃</button></div></form></div><div id="admin-message" class="admin-message" role="status" aria-live="polite"></div></dialog><script>(() => {
+
+  let webapps=[];
+  function validAppUrl(value){try{const url=new URL(value);return ['https:','http:'].includes(url.protocol);}catch{return false;}}
+  function renderWebapps(){
+    const grid=document.querySelector('#webapp-grid');grid.replaceChildren();
+    if(!webapps.length){const empty=document.createElement('p');empty.className='webapp-empty';empty.textContent='웹앱을 준비하고 있습니다. 곧 이곳에서 만나보세요.';grid.append(empty);}
+    webapps.forEach((app,index)=>{
+      const card=document.createElement('article');card.className='webapp-card';
+      const link=document.createElement('a');link.href=app.url;link.target='_blank';link.rel='noopener noreferrer';
+      const image=document.createElement('img');image.src=app.thumbnail;image.alt=app.title+' 썸네일';image.loading='lazy';image.referrerPolicy='no-referrer';image.onerror=()=>{image.hidden=true;};
+      const title=document.createElement('h3');title.textContent=app.title;
+      const action=document.createElement('span');action.className='webapp-launch';action.textContent='웹앱 사용하기 ↗';link.append(image,title,action);
+      const edit=document.createElement('button');edit.type='button';edit.className='history-edit';edit.textContent='수정';edit.setAttribute('aria-label',app.title+' 수정');edit.onclick=()=>openWebapp(app.id);
+      card.append(link,edit);grid.append(card);
+    });
+  }
+  async function openWebapp(id){
+    historyDialog.replaceChildren();
+    const title=document.createElement('h2');title.textContent='관리자 비밀번호 확인';
+    const auth=document.createElement('form');
+    const label=document.createElement('label');label.textContent='비밀번호';label.htmlFor='webapp-password';
+    const password=document.createElement('input');password.id=label.htmlFor;password.type='password';password.required=true;password.autocomplete='current-password';
+    const feedback=document.createElement('p');feedback.setAttribute('role','status');
+    const submit=document.createElement('button');submit.type='submit';submit.className='btn primary';submit.textContent='확인';
+    const cancel=document.createElement('button');cancel.type='button';cancel.className='btn';cancel.textContent='취소';cancel.onclick=()=>historyDialog.close();
+    const actions=document.createElement('div');actions.className='editor-actions';actions.append(submit,cancel);auth.append(label,password,feedback,actions);historyDialog.append(title,auth);
+    auth.onsubmit=async event=>{event.preventDefault();submit.disabled=true;try{await api('login','POST',{password:password.value});await loading;await loadContent();historyDialog.close();editWebapp(id);}catch(error){feedback.textContent=error.message;}finally{submit.disabled=false;}};
+    historyDialog.showModal();password.focus();
+  }
+  function editWebapp(id){
+    const existing=webapps.find(app=>app.id===id);
+    if(id&&!existing){document.querySelector('#webapp-status').textContent='이 웹앱은 다른 창에서 삭제되었습니다.';return;}
+    historyDialog.replaceChildren();
+    const top=document.createElement('div');top.className='dialog-top';
+    const heading=document.createElement('h2');heading.textContent=existing?'웹앱 수정':'웹앱 추가하기';
+    const close=document.createElement('button');close.type='button';close.className='close-dialog';close.textContent='×';close.setAttribute('aria-label','닫기');close.onclick=()=>historyDialog.close();top.append(heading,close);
+    const form=document.createElement('form');
+    function inputField(text,name,type,value){const label=document.createElement('label');label.textContent=text;label.htmlFor='webapp-'+name;const input=document.createElement('input');input.id=label.htmlFor;input.name=name;input.type=type;input.value=value||'';form.append(label,input);return input;}
+    const name=inputField('웹앱 제목','title','text',existing?.title);name.required=true;name.maxLength=120;
+    const url=inputField('웹앱 링크','url','url',existing?.url);url.required=true;url.placeholder='https://';url.maxLength=2000;
+    const file=inputField('썸네일 이미지 업로드','image','file');file.accept='image/png,image/jpeg,image/webp';
+    const hint=document.createElement('p');hint.textContent='PNG, JPG, WebP 이미지(최대 10MB)를 선택하세요.';form.append(hint);
+    const preview=document.createElement('img');preview.className='webapp-preview';preview.alt='썸네일 미리보기';preview.hidden=!existing;form.append(preview);
+    let thumbnail=existing?.thumbnail||'';if(thumbnail)preview.src=thumbnail;
+    const message=document.createElement('p');message.setAttribute('role','status');
+    const actions=document.createElement('div');actions.className='editor-actions';
+    const save=document.createElement('button');save.type='submit';save.className='btn primary';save.textContent='저장';actions.append(save);
+    let processing=false;
+    file.onchange=async()=>{
+      if(!file.files[0])return;processing=true;save.disabled=true;
+      try{
+        const selected=file.files[0];if(!['image/png','image/jpeg','image/webp'].includes(selected.type)||selected.size>10*1024*1024)throw new Error('10MB 이하의 PNG, JPG, WebP 이미지를 선택해주세요.');
+        const bitmap=await createImageBitmap(selected);const canvas=document.createElement('canvas');const scale=Math.min(1,480/bitmap.width,320/bitmap.height);canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));const context=canvas.getContext('2d');context.fillStyle='#eef6ff';context.fillRect(0,0,canvas.width,canvas.height);context.drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();
+        const result=canvas.toDataURL('image/jpeg',0.65);if(result.length>80000)throw new Error('이미지가 복잡해 저장 용량을 초과했습니다. 더 작은 이미지를 선택해주세요.');thumbnail=result;preview.src=result;preview.hidden=false;message.textContent='';
+      }catch(error){file.value='';message.textContent=error.message;}finally{processing=false;save.disabled=false;}
+    };
+    async function commit(next){
+      if(processing)return;save.disabled=true;
+      try{if(JSON.stringify(next).length>380000)throw new Error('웹앱 저장 용량을 초과했습니다. 일부 썸네일을 더 작은 이미지로 변경해주세요.');
+        const values=Object.fromEntries(fields.map(({id,el})=>[id,el.innerText]));groups.forEach(group=>values[group.id]=JSON.stringify(historyData(group)));
+        const result=await api('save','POST',{values,revision,webapps:next});revision=result.revision;webapps=next;renderWebapps();historyDialog.close();document.querySelector('#webapp-status').textContent=localMode?'저장했습니다. 이 브라우저에서 다시 열어도 유지됩니다.':'사이트에 저장했습니다. 다른 선생님들도 사용할 수 있습니다.';
+      }catch(error){message.textContent=error.message;}finally{save.disabled=false;}
+    }
+    if(existing){const remove=document.createElement('button');remove.type='button';remove.className='btn';remove.textContent='삭제';remove.onclick=()=>{if(confirm('이 웹앱을 삭제할까요?'))commit(webapps.filter(app=>app.id!==id));};actions.append(remove);}
+    form.onsubmit=event=>{event.preventDefault();if(!validAppUrl(url.value.trim())){message.textContent='http 또는 https로 시작하는 링크를 입력해주세요.';return;}if(!thumbnail){message.textContent='썸네일 이미지를 업로드해주세요.';return;}if(!existing&&webapps.length>=30){message.textContent='웹앱은 최대 30개까지 등록할 수 있습니다.';return;}const app={id:existing?.id||crypto.randomUUID(),title:name.value.trim(),url:url.value.trim(),thumbnail};if(!app.title){message.textContent='웹앱 제목을 입력해주세요.';return;}commit(existing?webapps.map(item=>item.id===id?app:item):[...webapps,app]);};
+    form.append(message,actions);historyDialog.append(top,form);historyDialog.showModal();name.focus();
+  }
+  document.querySelector('#webapp-add').onclick=()=>openWebapp();renderWebapps();
+
+  const localMode = location.protocol === 'file:' || ['localhost','127.0.0.1'].includes(location.hostname);
+  const historyKey = 'hansol-history-editor-v1';
+  const groups = [
+    {selector:'.featured',item:'.feature',fields:['.small-label','h3','p','.date'],labels:['분류','제목','설명','기간'],title:'주요 이력'},
+    {selector:'.roles',item:'.role',fields:['.num','h4','.status'],labels:['분류','활동명','활동 상태'],title:'AI·디지털 선도 교원활동'},
+    {selector:'.detail-grid > div:first-child',item:'.row',fields:['.period','strong','p'],labels:['기간','강의·활동명','설명'],title:'강의와 다음 세대의 성장'},
+    {selector:'.detail-grid > div:last-child',item:'.row',fields:['.period','strong','p'],labels:['기간','참여 활동명','설명'],title:'교육 공동체를 위한 참여'},
+    {selector:'.education',item:':scope > div',fields:['.degree','strong','p'],labels:['학위','학교','전공'],title:'학력'},
+    {selector:'.award',item:'.award',fields:['.small-label','strong','p','time'],labels:['분류','수상명','분야','연도'],title:'수상'}
+  ].map((group,index)=>{
+    group.container=document.querySelector(group.selector);
+    group.id='e'+(900+index);
+    group.items=group.item==='.award'?[group.container]:[...group.container.querySelectorAll(group.item)];
+    group.template=group.items[0].cloneNode(true);
+    return group;
+  });
+  const historyDialog=document.createElement('dialog');
+  historyDialog.className='editor-dialog';historyDialog.setAttribute('aria-label','이력 편집');
+  document.body.append(historyDialog);
+  const historyNotice=document.createElement('div');historyNotice.className='history-notice';historyNotice.setAttribute('role','status');
+  document.querySelector('#project .wrap').append(historyNotice);
+  let historyDirty=false;
+  function historyData(group){return group.items.map(item=>group.fields.map(selector=>item.querySelector(selector).innerText));}
+  function setHistory(group,rows){
+    group.items.forEach(item=>item.remove());group.items=[];
+    rows.forEach(row=>{
+      const item=group.template.cloneNode(true);
+      item.querySelectorAll('[data-edit]').forEach(el=>el.removeAttribute('data-edit'));
+      group.fields.forEach((selector,i)=>{item.querySelector(selector).textContent=row[i];});
+      if(group.item==='.award')group.add.parentNode.insertBefore(item,group.add);
+      else group.container.insertBefore(item,group.container.querySelector('.history-add')|| (group.selector.includes('last-child')?group.container.lastElementChild:null));
+      group.items.push(item);
+    });
+    decorateHistory(group);
+  }
+  function decorateHistory(group){
+    group.items.forEach((item,index)=>{
+      item.querySelectorAll('.history-controls').forEach(el=>el.remove());
+      const controls=document.createElement('div');controls.className='history-controls';
+      const button=document.createElement('button');button.type='button';button.textContent='수정';button.className='history-edit';
+      button.setAttribute('aria-label',group.title+' '+(index+1)+' 수정');
+      button.onclick=()=>openHistory(group,index);controls.append(button);item.append(controls);
+    });
+  }
+  async function openHistory(group,index,unlocked=false){
+    if(!unlocked){
+      historyDialog.replaceChildren();
+      const title=document.createElement('h2');title.textContent='관리자 비밀번호 확인';
+      const form=document.createElement('form');
+      const label=document.createElement('label');label.htmlFor='history-password';label.textContent='비밀번호';
+      const password=document.createElement('input');password.id='history-password';password.type='password';password.autocomplete='current-password';password.required=true;password.maxLength=100;
+      const message=document.createElement('p');message.setAttribute('role','status');
+      const actions=document.createElement('div');actions.className='editor-actions';
+      const submit=document.createElement('button');submit.type='submit';submit.className='btn primary';submit.textContent='확인';
+      const cancel=document.createElement('button');cancel.type='button';cancel.className='btn';cancel.textContent='취소';cancel.onclick=()=>historyDialog.close();
+      actions.append(submit,cancel);form.append(label,password,message,actions);historyDialog.append(title,form);
+      form.onsubmit=async event=>{
+        event.preventDefault();submit.disabled=true;
+        try{
+          await api('login','POST',{password:password.value});password.value='';
+          await loading;await loadContent();historyDialog.close();openHistory(group,index,true);
+        }catch(error){message.textContent=error.message;password.select();}
+        finally{submit.disabled=false;}
+      };
+      historyDialog.showModal();password.focus();return;
+    }
+    historyDialog.replaceChildren();
+    const top=document.createElement('div');top.className='dialog-top';
+    const title=document.createElement('h2');title.textContent=group.title+(index===undefined?' 추가':' 수정');
+    const close=document.createElement('button');close.className='close-dialog';close.type='button';close.textContent='×';close.setAttribute('aria-label','닫기');close.onclick=()=>historyDialog.close();top.append(title,close);
+    const form=document.createElement('form');
+    const rows=historyData(group);const values=index===undefined?group.fields.map(()=> ''):rows[index];
+    group.labels.forEach((labelText,i)=>{
+      const label=document.createElement('label');label.textContent=labelText;label.htmlFor='history-input-'+i;
+      const input=document.createElement('textarea');input.id=label.htmlFor;input.name=String(i);input.value=values[i];input.maxLength=500;input.required=i===1;form.append(label,input);
+    });
+    const feedback=document.createElement('p');feedback.setAttribute('role','status');
+    const actions=document.createElement('div');actions.className='editor-actions';
+    const save=document.createElement('button');save.type='submit';save.className='btn primary';save.textContent='저장';actions.append(save);
+    if(index!==undefined){const remove=document.createElement('button');remove.type='button';remove.className='btn';remove.textContent='삭제';remove.onclick=()=>{if(confirm('이 이력을 삭제할까요?'))commit(rows.filter((_,i)=>i!==index));};actions.append(remove);}
+    form.append(feedback,actions);historyDialog.append(top,form);
+    async function commit(next){
+      if(JSON.stringify(next).length>3000){feedback.textContent='이 영역의 저장 용량을 초과했습니다. 설명을 조금 줄여주세요.';return;}
+      save.disabled=true;
+      const payload=Object.fromEntries(fields.map(({id,el})=>[id,el.innerText]));
+      groups.forEach(g=>payload[g.id]=JSON.stringify(g===group?next:historyData(g)));
+      try{
+        const result=await api('save','POST',{values:payload,revision});revision=result.revision;
+        setHistory(group,next);historyDirty=true;historyDialog.close();historyNotice.textContent=localMode?'저장했습니다. 이 브라우저에서 다시 열어도 유지됩니다.':'사이트에 저장했습니다.';
+      }catch(error){feedback.textContent=error.status===401?'페이지 아래의 관리자 편집에서 로그인한 뒤 다시 저장해주세요.':error.message;}
+      finally{save.disabled=false;}
+    }
+    form.onsubmit=event=>{event.preventDefault();const row=group.fields.map((_,i)=>form.elements.namedItem(String(i)).value.trim());if(index===undefined)rows.push(row);else rows[index]=row;commit(rows);};
+    historyDialog.showModal();form.querySelector('textarea').focus();
+  }
+  groups.forEach(group=>{
+    const add=document.createElement('button');add.type='button';add.className='history-add';add.textContent='+ 이력 추가';add.setAttribute('aria-label',group.title+' 추가');add.onclick=()=>openHistory(group);group.add=add;
+    if(group.item==='.award')group.container.after(add);else group.container.append(add);
+    decorateHistory(group);
+  });
+
+  const selector = 'h1,.intro,.name span,.section-heading h2,.section-heading p,.feature h3,.feature p,.date,.role h4,.row .period,.row strong,.row p,.education strong,.education p,.award strong,.award p,.award time,#contact h2,#contact p,.contact-link strong';
+  const fields = [...document.querySelectorAll(selector)].filter(el=>!el.closest('#webapps')).map((el, i) => {
+    el.dataset.edit = 'e' + i;
+    return {el, id: 'e' + i, original: el.innerText, section: el.closest('section').id};
+  });
+  const dialog = document.querySelector('#admin-dialog');
+  const message = document.querySelector('#admin-message');
+  const loginView = document.querySelector('#login-view');
+  const editorView = document.querySelector('#editor-view');
+  let revision = null;
+  let localAuthenticated = false;
+  let loading;
+  const status = text => {message.textContent = text;};
+  async function api(action, method='GET', data) {
+    if(action==='save'&&data&&!Object.hasOwn(data,'webapps'))data.webapps=webapps;
+    if(localMode){
+      const unauthorized=()=>{const error=new Error('비밀번호가 올바르지 않거나 로그인이 필요합니다.');error.status=401;throw error;};
+      if(action==='login'){if(data?.password!=='12345')unauthorized();localAuthenticated=true;return {authenticated:true};}
+      if(action==='logout'){localAuthenticated=false;return {authenticated:false};}
+      if(['session','save'].includes(action)&&!localAuthenticated)unauthorized();
+      let saved;try{saved=JSON.parse(localStorage.getItem(historyKey)||'null');}catch{saved=null;}
+      if(action==='content')return saved||{values:{},revision:null};
+      if(action==='save'){if((saved?.revision||null)!==(data.revision||null))throw new Error('다른 창에서 내용이 변경되었습니다. 새로고침 후 다시 편집해주세요.');const result={values:data.values,webapps:data.webapps,revision:crypto.randomUUID()};localStorage.setItem(historyKey,JSON.stringify(result));return result;}
+      return {authenticated:true};
+    }
+    const response = await fetch('/.netlify/functions/editor?action=' + action, {method, credentials:'same-origin', cache:'no-store', headers: data ? {'Content-Type':'application/json'} : {}, body:data ? JSON.stringify(data) : undefined});
+    let result;
+    try {result = await response.json();} catch {throw new Error('서버 편집 기능이 아직 연결되지 않았습니다. Netlify 서버 배포를 먼저 완료해주세요.');}
+    if (!response.ok) {const error = new Error(result.error || '요청을 처리하지 못했습니다.'); error.status=response.status; throw error;}
+    return result;
+  }
+  function apply(values) {
+    fields.forEach(({el,id}) => {
+      if(typeof values?.[id]!=='string')return;
+      if(el.tagName==='H1'){
+        const lines=values[id].split('\n');el.replaceChildren(document.createTextNode(lines.shift()));
+        if(lines.length){el.append(document.createElement('br'));const accent=document.createElement('em');accent.textContent=lines.join('\n');el.append(accent);}
+      }else el.textContent=values[id];
+    });
+    groups.forEach(group=>{
+      if(typeof values?.[group.id]!=='string')return;
+      try{const rows=JSON.parse(values[group.id]);if(Array.isArray(rows)&&rows.every(row=>Array.isArray(row)&&row.length===group.fields.length&&row.every(value=>typeof value==='string')))setHistory(group,rows);}catch{}
+    });
+    const email = document.querySelector('.contact-link strong').textContent.trim();
+    document.querySelector('.contact-link').href='mailto:' + email;
+  }
+  async function loadContent() {
+    const result = await api('content');
+    revision = result.revision;
+    webapps=Array.isArray(result.webapps)?result.webapps.filter(app=>app&&typeof app.id==='string'&&typeof app.title==='string'&&validAppUrl(app.url)&&typeof app.thumbnail==='string'&&/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(app.thumbnail)):[];renderWebapps();
+    apply(result.values);
+  }
+  function renderFields() {
+    const container = document.querySelector('#editor-fields');
+    container.replaceChildren();
+    let section;
+    fields.forEach(({id,el,section:group},index) => {
+      if(section!==group){const heading=document.createElement('h3'); heading.textContent=({about:'소개',project:'프로젝트 · 경력 · 학력 · 수상',contact:'연락'})[group];container.append(heading);section=group;}
+      if(group==='project'&&!el.isConnected)return;
+      const label=document.createElement('label');label.htmlFor='edit-'+id;label.textContent=el.textContent.trim().slice(0,40)||'내용 '+(index+1);
+      const input=document.createElement(el.matches('.contact-link strong')?'input':'textarea');
+      input.id='edit-'+id;input.name=id;input.maxLength=3000;input.value=el.innerText;
+      if(el.matches('.contact-link strong')){input.type='email';input.required=true;}
+      container.append(label,input);
+    });
+  }
+  function showEditor(){loginView.hidden=true;editorView.hidden=false;renderFields();document.querySelector('#editor-fields textarea')?.focus();}
+  document.querySelector('#admin-open').addEventListener('click', async()=>{
+    dialog.showModal();status('접속 상태를 확인하고 있습니다.');
+    try{await loading;await api('session');showEditor();status('');}
+    catch(error){loginView.hidden=false;editorView.hidden=true;status(error.status===401?'':error.message);document.querySelector('#admin-password').focus();}
+  });
+  document.querySelector('.close-dialog').addEventListener('click',()=>dialog.close());
+  document.querySelector('#login-form').addEventListener('submit',async event=>{
+    event.preventDefault();const button=event.submitter;button.disabled=true;status('로그인 중입니다.');
+    try{await api('login','POST',{password:document.querySelector('#admin-password').value});document.querySelector('#admin-password').value='';await loadContent();showEditor();status('');}
+    catch(error){status(error.message);}finally{button.disabled=false;}
+  });
+  document.querySelector('#editor-form').addEventListener('submit',async event=>{
+    event.preventDefault();const button=event.submitter;button.disabled=true;status('사이트에 저장하고 있습니다.');
+    const values=Object.fromEntries(fields.map(({id,el})=>[id,el.innerText]));
+    Object.assign(values,Object.fromEntries(new FormData(event.target)));
+    groups.forEach(group=>values[group.id]=JSON.stringify(historyData(group)));
+    try{const result=await api('save','POST',{values,revision});revision=result.revision;apply(values);status('저장했습니다. 방문자는 새로고침하면 수정된 내용을 볼 수 있습니다.');}
+    catch(error){if(error.status===401){loginView.hidden=false;editorView.hidden=true;}status(error.message);}finally{button.disabled=false;}
+  });
+  document.querySelector('#admin-logout').addEventListener('click',async()=>{try{await api('logout','POST',{});editorView.hidden=true;loginView.hidden=false;status('로그아웃했습니다.');}catch(error){status(error.message);}});
+  loading=loadContent().catch(error=>{console.info('관리자 서버 연결 대기:',error.message);});
+})();
+</script><script>if(location.protocol==='https:'&&'serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script></body></html>

@@ -6,6 +6,7 @@ const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':
 const reply=(data,status=200,extra={})=>new Response(JSON.stringify(data),{status,headers:{...headers,...extra}});
 const cookie=(token,maxAge)=>`${COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`;
 function validValues(values){return values&&typeof values==='object'&&!Array.isArray(values)&&Object.keys(values).length<=150&&Object.entries(values).every(([id,value])=>/^e\d{1,3}$/.test(id)&&typeof value==='string'&&value.length<=3000);}
+function validWebapps(apps){return Array.isArray(apps)&&apps.length<=30&&JSON.stringify(apps).length<=380000&&apps.every(app=>app&&typeof app.id==='string'&&app.id.length<=100&&typeof app.title==='string'&&app.title.trim().length>0&&app.title.length<=120&&typeof app.url==='string'&&app.url.length<=2000&&(()=>{try{return ['http:','https:'].includes(new URL(app.url).protocol);}catch{return false;}})()&&typeof app.thumbnail==='string'&&app.thumbnail.length<=80000&&/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(app.thumbnail));}
 export function createHandler(store){
   return async function(request,context={}){
     try {
@@ -40,9 +41,10 @@ export function createHandler(store){
         if(!loggedIn)return reply({error:'로그인이 만료되었습니다. 다시 로그인해주세요.'},401);
         const body=await request.json();
         if(!validValues(body.values))return reply({error:'편집 내용의 형식 또는 길이가 올바르지 않습니다.'},400);
+        if(body.webapps!==undefined&&!validWebapps(body.webapps))return reply({error:'웹앱 제목, 링크 또는 썸네일 형식이 올바르지 않습니다.'},400);
         const current=await read('content');
         if((current?.revision||null)!==(body.revision||null))return reply({error:'다른 창에서 내용을 수정했습니다. 창을 닫고 다시 열어 최신 내용을 확인해주세요.'},409);
-        const saved={values:body.values,revision:randomBytes(16).toString('hex'),updatedAt:new Date().toISOString()};
+        const saved={values:body.values,webapps:body.webapps??current?.webapps??[],revision:randomBytes(16).toString('hex'),updatedAt:new Date().toISOString()};
         await store.setJSON('content',saved);
         return reply({revision:saved.revision,updatedAt:saved.updatedAt});
       }

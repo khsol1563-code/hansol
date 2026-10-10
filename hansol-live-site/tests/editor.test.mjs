@@ -22,3 +22,21 @@ test('repeated incorrect passwords are rate limited',async()=>{
   for(let i=0;i<8;i++)assert.equal((await handler(request('login',{password:'wrong'}),{ip:'test-ip'})).status,401);
   assert.equal((await handler(request('login',{password:'12345'}),{ip:'test-ip'})).status,429);
 });
+test('webapps persist, survive text saves, and reject unsafe links and images',async()=>{
+  const memory=new Map();
+  const appHandler=createHandler({get:async key=>memory.get(key)||null,setJSON:async(key,value)=>memory.set(key,structuredClone(value)),delete:async key=>memory.delete(key)});
+  const login=await appHandler(request('login',{password:'12345'}));
+  const cookie=login.headers.get('set-cookie').split(';')[0];
+  const app={id:'test-app',title:'수업 도구',url:'https://example.com/tool',thumbnail:'data:image/jpeg;base64,YQ=='};
+  assert.equal((await appHandler(request('save',{values:{e0:'소개'},revision:null,webapps:[app]},cookie))).status,200);
+  let content=await (await appHandler(request('content'))).json();
+  assert.deepEqual(content.webapps,[app]);
+  assert.equal((await appHandler(request('save',{values:{e0:'수정'},revision:content.revision},cookie))).status,200);
+  content=await (await appHandler(request('content'))).json();assert.deepEqual(content.webapps,[app]);
+  for(const invalid of [{...app,url:'javascript:alert(1)'},{...app,thumbnail:'data:image/svg+xml;base64,YQ=='},{...app,title:''}]){
+    assert.equal((await appHandler(request('save',{values:{},revision:content.revision,webapps:[invalid]},cookie))).status,400);
+  }
+  assert.equal((await appHandler(request('save',{values:{},revision:content.revision,webapps:[]}))).status,401);
+  assert.equal((await appHandler(request('save',{values:{},revision:content.revision,webapps:[]},cookie))).status,200);
+  assert.deepEqual((await (await appHandler(request('content'))).json()).webapps,[]);
+});
