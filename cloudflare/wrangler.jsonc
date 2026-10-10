@@ -1,0 +1,15 @@
+{
+  "name": "hansol-portfolio",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-10",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*", "/.netlify/functions/*"]
+  },
+  "durable_objects": {
+    "bindings": [{"name": "PORTFOLIO", "class_name": "PortfolioStore"}]
+  },
+  "migrations": [{"tag": "v1", "new_sqlite_classes": ["PortfolioStore"]}]
+}

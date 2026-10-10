@@ -87,7 +87,7 @@ const links=[...document.querySelectorAll('.navlinks a,.app-nav a')];const obser
   }
   document.querySelector('#webapp-add').onclick=()=>openWebapp();renderWebapps();
 
-  const localMode = location.protocol === 'file:' || ['localhost','127.0.0.1'].includes(location.hostname);
+  const localMode = location.protocol === 'file:';
   const historyKey = 'hansol-history-editor-v1';
   const groups = [
     {selector:'.featured',item:'.feature',fields:['.small-label','h3','p','.date'],labels:['분류','제목','설명','기간'],title:'주요 이력'},
@@ -213,9 +213,9 @@ const links=[...document.querySelectorAll('.navlinks a,.app-nav a')];const obser
       if(action==='save'){if((saved?.revision||null)!==(data.revision||null))throw new Error('다른 창에서 내용이 변경되었습니다. 새로고침 후 다시 편집해주세요.');const result={values:data.values,webapps:data.webapps,revision:crypto.randomUUID()};localStorage.setItem(historyKey,JSON.stringify(result));return result;}
       return {authenticated:true};
     }
-    const response = await fetch('/.netlify/functions/editor?action=' + action, {method, credentials:'same-origin', cache:'no-store', headers: data ? {'Content-Type':'application/json'} : {}, body:data ? JSON.stringify(data) : undefined});
+    const response = await fetch('/api/editor?action=' + action, {method, credentials:'same-origin', cache:'no-store', headers: data ? {'Content-Type':'application/json'} : {}, body:data ? JSON.stringify(data) : undefined});
     let result;
-    try {result = await response.json();} catch {throw new Error('서버 편집 기능이 아직 연결되지 않았습니다. Netlify 서버 배포를 먼저 완료해주세요.');}
+    try {result = await response.json();} catch {throw new Error('Cloudflare 저장 서버에 연결되지 않았습니다. 배포 주소에서 다시 시도해주세요.');}
     if (!response.ok) {const error = new Error(result.error || '요청을 처리하지 못했습니다.'); error.status=response.status; throw error;}
     return result;
   }

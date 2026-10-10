@@ -1,0 +1,12 @@
+{
+  "name": "hansol-cloudflare-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-cloudflare.mjs",
+    "dev": "npm run build && wrangler dev --config cloudflare/wrangler.jsonc",
+    "deploy": "npm run build && wrangler deploy --config cloudflare/wrangler.jsonc && wrangler pages deploy cloudflare/public --project-name hansol --branch main",
+    "test": "node --test tests/cloudflare-editor.test.mjs tests/pages-proxy.test.mjs"
+  },
+  "devDependencies": {"wrangler": "4.149.0"}
+}
