@@ -1,0 +1,64 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {randomUUID} from 'node:crypto';
+import {JSDOM} from 'jsdom';
+import {createEditor} from '../cloudflare/editor.mjs';
+const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+async function until(condition){for(let i=0;i<100;i++){if(condition())return;await new Promise(resolve=>setTimeout(resolve,15));}throw new Error('UI condition not reached');}
+test('single public editor, password gate, all-in-one history and webapp editing with draft isolation',async()=>{
+  const db=new Map();
+  const handler=createEditor({get:async key=>structuredClone(db.get(key)),set:async(key,value)=>db.set(key,structuredClone(value)),delete:async key=>db.delete(key),saveContent:async body=>{const current=db.get('content');if((current?.revision||null)!==(body.revision||null))return null;const saved={values:body.values,webapps:body.webapps??current?.webapps??[],revision:randomUUID()};db.set('content',structuredClone(saved));return saved;}});
+  let cookie='',confirmResult=true;
+  const origin='https://hansol-97l.pages.dev';
+  const thumbnail='data:image/jpeg;base64,'+readFileSync(new URL('./test-thumbnail.jpg',import.meta.url)).toString('base64');
+  const dom=new JSDOM(html,{url:origin,runScripts:'dangerously',pretendToBeVisual:true,beforeParse(window){
+    Object.defineProperty(window.HTMLElement.prototype,'innerText',{get(){return this.textContent;},set(value){this.textContent=value;}});
+    window.IntersectionObserver=class{observe(){}};
+    window.structuredClone=structuredClone;window.crypto.randomUUID=randomUUID;window.confirm=()=>confirmResult;
+    window.HTMLDialogElement.prototype.showModal=function(){this.open=true;};window.HTMLDialogElement.prototype.close=function(){this.open=false;};
+    window.createImageBitmap=async()=>({width:640,height:480,close(){}});
+    window.HTMLCanvasElement.prototype.getContext=()=>({fillRect(){},drawImage(){}});
+    window.HTMLCanvasElement.prototype.toDataURL=()=>thumbnail;
+    window.fetch=async(url,options={})=>{const response=await handler(new Request(new URL(url,origin),{method:options.method||'GET',headers:{Origin:origin,...options.headers,...(cookie?{Cookie:cookie}:{})},body:options.body}));if(response.headers.has('set-cookie'))cookie=response.headers.get('set-cookie').split(';')[0];return response;};
+  }});
+  try{
+    const {document}=dom.window;
+    await until(()=>document.querySelector('#webapp-grid .webapp-empty'));
+    assert.equal(document.querySelectorAll('header #admin-open').length,1);
+    assert.equal(document.querySelectorAll('main .history-add,main .history-controls,main .affiliation-edit,main #webapp-add,main .history-edit,footer #admin-open').length,0);
+    const click=text=>{const button=[...document.querySelectorAll('#editor-fields button')].find(button=>button.textContent===text);assert.ok(button,text);button.click();};
+    const edit=(labelText,value,scope=document)=>{const label=[...scope.querySelectorAll('label.manager-field')].find(label=>label.firstElementChild.textContent===labelText);assert.ok(label,labelText);const input=label.querySelector('input,textarea');input.value=value;input.dispatchEvent(new dom.window.Event('input',{bubbles:true}));};
+    document.querySelector('#admin-open').click();document.querySelector('#admin-password').value='wrong';document.querySelector('#login-form').requestSubmit();
+    await until(()=>document.querySelector('#admin-message').textContent.includes('올바르지'));
+    assert.equal(document.querySelector('#editor-view').hidden,true);
+    document.querySelector('#admin-password').value='12345';document.querySelector('#login-form').requestSubmit();await until(()=>!document.querySelector('#editor-view').hidden);
+    assert.equal(document.querySelectorAll('.manager-section').length,9);
+    edit('소속 학교·직함','새학교 교사');edit('소개 문구','검증용 소개');
+    const publicAffiliation=document.querySelector('.name span').textContent;
+    assert.ok(!publicAffiliation.includes('새학교'));
+    const featured=document.querySelectorAll('.manager-section')[1];featured.open=true;
+    edit('활동명','수정한 전문가 활동',featured);
+    featured.querySelector('.manager-add').click();const added=featured.querySelectorAll('.manager-card')[2];edit('활동명','추가한 전문가 활동',added);edit('기간','2026',added);
+    const committees=document.querySelectorAll('.manager-section')[4];committees.open=true;committees.querySelector('.manager-delete').click();
+    const apps=document.querySelectorAll('.manager-section')[7];apps.open=true;click('+ 웹앱 추가');
+    edit('웹앱 제목','공유 수업 도구',apps);edit('웹앱 링크','https://example.com/tool',apps);
+    const file=apps.querySelector('input[type=file]');Object.defineProperty(file,'files',{value:[new dom.window.File(['image'],'test.jpg',{type:'image/jpeg'})]});file.dispatchEvent(new dom.window.Event('change'));
+    await until(()=>apps.querySelector('.manager-thumbnail').src===thumbnail);
+    document.querySelector('#editor-form').requestSubmit();await until(()=>document.querySelector('#admin-message').textContent.includes('전체 내용을 저장했습니다'));
+    assert.ok(document.querySelector('.name span').textContent.includes('새학교 교사'));
+    assert.equal(document.querySelector('.intro').textContent,'검증용 소개');
+    assert.equal(document.querySelectorAll('.featured .feature').length,3);assert.equal(document.querySelector('.feature h3').textContent,'수정한 전문가 활동');
+    assert.equal(document.querySelectorAll('.detail-grid > div:last-child .row').length,1);
+    assert.equal(document.querySelector('#webapp-grid h3').textContent,'공유 수업 도구');
+    const saved=db.get('content');assert.equal(JSON.parse(saved.values.e900).length,3);assert.equal(saved.values.e1,'검증용 소개');assert.equal(saved.webapps[0].thumbnail,thumbnail);
+    edit('소속 학교·직함','저장하지 않은 학교');confirmResult=false;document.querySelector('.close-dialog').click();assert.equal(document.querySelector('#admin-dialog').open,true);
+    confirmResult=true;document.querySelector('.close-dialog').click();assert.equal(document.querySelector('#admin-dialog').open,false);assert.ok(!document.querySelector('.name span').textContent.includes('저장하지 않은 학교'));
+    document.querySelector('#admin-open').click();assert.equal(document.querySelector('#editor-view').hidden,true);
+    document.querySelector('#admin-password').value='12345';document.querySelector('#login-form').requestSubmit();await until(()=>!document.querySelector('#editor-view').hidden);
+    assert.equal(document.querySelectorAll('.manager-section')[1].querySelectorAll('.manager-card').length,3);
+    assert.equal(document.querySelectorAll('.manager-section')[4].querySelectorAll('.manager-card').length,1);
+    assert.equal(document.querySelectorAll('.manager-section')[7].querySelectorAll('.manager-card').length,1);
+    assert.equal(document.querySelector('.manager-field input').value,'새학교 교사');
+  }finally{dom.window.close();}
+});
