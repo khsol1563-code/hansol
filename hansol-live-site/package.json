@@ -1,7 +1,0 @@
-{
-  "name": "hansol-ai-portfolio",
-  "private": true,
-  "type": "module",
-  "scripts": {"build": "node scripts/check.mjs", "test": "node --test tests/editor.test.mjs"},
-  "dependencies": {"@netlify/blobs": "^10.0.0"}
-}
