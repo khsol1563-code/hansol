@@ -9,7 +9,7 @@ async function api(action,body,cookie){
 const page=await fetch(origin+'/');assert.equal(page.status,200);assert.match(await page.text(),/함께 쓰는 바이브코딩 웹앱/);
 assert.equal((await api('login',{password:'wrong'})).response.status,401);
 assert.equal((await api('save',{values:{},revision:null})).response.status,401);
-const login=await api('login',{password:'12345'});assert.equal(login.response.status,200);
+const login=await api('login',{password:process.env.HANSOL_ADMIN_PASSWORD});assert.equal(login.response.status,200);
 const cookie=login.response.headers.get('set-cookie').split(';')[0];assert.equal((await api('session',undefined,cookie)).response.status,200);
 const initial=(await api('content')).data;
 if(process.argv.includes('--write')){

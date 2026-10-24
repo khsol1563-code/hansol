@@ -6,7 +6,7 @@
     "build": "node scripts/build-cloudflare.mjs",
     "dev": "npm run build && wrangler dev --config cloudflare/wrangler.jsonc",
     "deploy": "npm run build && wrangler deploy --config cloudflare/wrangler.jsonc && wrangler pages deploy cloudflare/public --project-name hansol --branch main",
-    "test": "node --test tests/cloudflare-editor.test.mjs tests/pages-proxy.test.mjs tests/unified-editor.test.mjs"
+    "test": "node --test tests/cloudflare-editor.test.mjs tests/pages-proxy.test.mjs tests/unified-editor.test.mjs tests/feedback.test.mjs tests/security-auth.test.mjs tests/lessons.test.mjs"
   },
   "devDependencies": {
     "jsdom": "^30.1.2",

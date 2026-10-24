@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {randomUUID} from 'node:crypto';
 import {JSDOM} from 'jsdom';
-import {createEditor} from '../cloudflare/editor.mjs';
+import {createEditor} from './test-auth.mjs';
 const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
 async function until(condition){for(let i=0;i<100;i++){if(condition())return;await new Promise(resolve=>setTimeout(resolve,15));}throw new Error('UI condition not reached');}
 test('single public editor, password gate, all-in-one history and webapp editing with draft isolation',async()=>{
@@ -32,8 +32,10 @@ test('single public editor, password gate, all-in-one history and webapp editing
     document.querySelector('#admin-open').click();document.querySelector('#admin-password').value='wrong';document.querySelector('#login-form').requestSubmit();
     await until(()=>document.querySelector('#admin-message').textContent.includes('올바르지'));
     assert.equal(document.querySelector('#editor-view').hidden,true);
-    document.querySelector('#admin-password').value='12345';document.querySelector('#login-form').requestSubmit();await until(()=>!document.querySelector('#editor-view').hidden);
-    assert.equal(document.querySelectorAll('.manager-section').length,9);
+    document.querySelector('#admin-password').value='test-only-admin-password-2026';document.querySelector('#login-form').requestSubmit();await until(()=>!document.querySelector('#editor-view').hidden);
+    assert.equal(document.querySelectorAll('.manager-section').length,10);
+    assert.ok(document.querySelector('#lessons .lesson-empty'));
+    assert.ok(document.querySelector('#lesson-upload-form input[name=thumbnail]'));
     edit('소속 학교·직함','새학교 교사');edit('소개 문구','검증용 소개');
     const publicAffiliation=document.querySelector('.name span').textContent;
     assert.ok(!publicAffiliation.includes('새학교'));
@@ -55,7 +57,7 @@ test('single public editor, password gate, all-in-one history and webapp editing
     edit('소속 학교·직함','저장하지 않은 학교');confirmResult=false;document.querySelector('.close-dialog').click();assert.equal(document.querySelector('#admin-dialog').open,true);
     confirmResult=true;document.querySelector('.close-dialog').click();assert.equal(document.querySelector('#admin-dialog').open,false);assert.ok(!document.querySelector('.name span').textContent.includes('저장하지 않은 학교'));
     document.querySelector('#admin-open').click();assert.equal(document.querySelector('#editor-view').hidden,true);
-    document.querySelector('#admin-password').value='12345';document.querySelector('#login-form').requestSubmit();await until(()=>!document.querySelector('#editor-view').hidden);
+    document.querySelector('#admin-password').value='test-only-admin-password-2026';document.querySelector('#login-form').requestSubmit();await until(()=>!document.querySelector('#editor-view').hidden);
     assert.equal(document.querySelectorAll('.manager-section')[1].querySelectorAll('.manager-card').length,3);
     assert.equal(document.querySelectorAll('.manager-section')[4].querySelectorAll('.manager-card').length,1);
     assert.equal(document.querySelectorAll('.manager-section')[7].querySelectorAll('.manager-card').length,1);

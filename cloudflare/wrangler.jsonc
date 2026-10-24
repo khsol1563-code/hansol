@@ -3,6 +3,10 @@
   "main": "worker.mjs",
   "compatibility_date": "2026-10-10",
   "workers_dev": true,
+  "vars": {
+    "ADMIN_PASSWORD_SALT": "hansol-cloudflare-admin-v2-2026",
+    "ADMIN_PASSWORD_HASH": "d27da02ddeca5ab607db5506ec858ba2d2fa1e722fdcd34d3bc55e6009dd6c95"
+  },
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",

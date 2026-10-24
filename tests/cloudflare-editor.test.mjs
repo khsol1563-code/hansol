@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createEditor} from '../cloudflare/editor.mjs';
+import {createEditor} from './test-auth.mjs';
 function setup(){
   const data=new Map();
   return createEditor({get:async key=>structuredClone(data.get(key)),set:async(key,value)=>data.set(key,structuredClone(value)),delete:async key=>data.delete(key),saveContent:async body=>{
@@ -14,7 +14,7 @@ test('Cloudflare authentication and public persistence, edits, deletion, CSRF an
   const handler=setup();
   assert.equal((await handler(request('save',{values:{}}))).status,401);
   assert.equal((await handler(request('login',{password:'wrong'}))).status,401);
-  const login=await handler(request('login',{password:'12345'}));assert.equal(login.status,200);
+  const login=await handler(request('login',{password:'test-only-admin-password-2026'}));assert.equal(login.status,200);
   const cookie=login.headers.get('set-cookie').split(';')[0];assert.match(login.headers.get('set-cookie'),/HttpOnly; Secure; SameSite=Strict/);
   assert.equal((await handler(request('session',null,cookie))).status,200);
   const app={id:'sample',title:'수업 도구',url:'https://example.com',thumbnail:'data:image/jpeg;base64,YQ=='};
@@ -33,6 +33,6 @@ test('Cloudflare authentication and public persistence, edits, deletion, CSRF an
 test('Cloudflare rate limit and malformed request validation',async()=>{
   const handler=setup();
   for(let i=0;i<8;i++)assert.equal((await handler(request('login',{password:'wrong'}))).status,401);
-  assert.equal((await handler(request('login',{password:'12345'}))).status,429);
+  assert.equal((await handler(request('login',{password:'test-only-admin-password-2026'}))).status,429);
   assert.equal((await handler(new Request(origin+'/api/editor?action=login',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:'{'}))).status,400);
 });
