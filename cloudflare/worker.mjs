@@ -32,7 +32,7 @@ export class PortfolioStore{
         const rows=this.sql.exec("SELECT value FROM records WHERE key = 'content'").toArray();
         const current=rows.length?JSON.parse(rows[0].value):null;
         if((current?.revision||null)!==(body.revision||null))return null;
-        const saved={values:body.values,webapps:body.webapps??current?.webapps??[],revision:crypto.randomUUID(),updatedAt:new Date().toISOString()};
+        const saved={values:body.values,webapps:body.webapps??current?.webapps??[],menuOrder:body.menuOrder??current?.menuOrder??['about','project','contact','webapps','lessons'],revision:crypto.randomUUID(),updatedAt:new Date().toISOString()};
         this.sql.exec("INSERT OR REPLACE INTO records (key,value) VALUES ('content',?)",JSON.stringify(saved));return saved;
       }
     },{passwordHash:env.ADMIN_PASSWORD_HASH,passwordSalt:env.ADMIN_PASSWORD_SALT},fileStore);

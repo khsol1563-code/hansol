@@ -31,7 +31,7 @@ test('feedback tabs allow new app requests and retain drafts after failure',asyn
     const d=dom.window.document;
     const toolLink=d.querySelector('.tool-collection-link');
     assert.equal(toolLink.getAttribute('href'),'#webapps');
-    assert.equal(toolLink.textContent.replace(/\s+/g,''),'교육용도구모음');
+    assert.equal(toolLink.textContent.replace(/\s+/g,''),'교육아이디어&웹앱나눔바로가기');
     assert.equal(d.querySelectorAll('.art-label').length,0);
     assert.equal(d.querySelector('#feedback h3').textContent,'함께 더 좋은 앱을 만들어요');
     assert.equal(d.querySelector('#feedback-request').textContent,'제작 요청');

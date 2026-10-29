@@ -8,7 +8,7 @@ const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
 async function until(condition){for(let i=0;i<100;i++){if(condition())return;await new Promise(resolve=>setTimeout(resolve,15));}throw new Error('UI condition not reached');}
 test('single public editor, password gate, all-in-one history and webapp editing with draft isolation',async()=>{
   const db=new Map();
-  const handler=createEditor({get:async key=>structuredClone(db.get(key)),set:async(key,value)=>db.set(key,structuredClone(value)),delete:async key=>db.delete(key),saveContent:async body=>{const current=db.get('content');if((current?.revision||null)!==(body.revision||null))return null;const saved={values:body.values,webapps:body.webapps??current?.webapps??[],revision:randomUUID()};db.set('content',structuredClone(saved));return saved;}});
+  const handler=createEditor({get:async key=>structuredClone(db.get(key)),set:async(key,value)=>db.set(key,structuredClone(value)),delete:async key=>db.delete(key),saveContent:async body=>{const current=db.get('content');if((current?.revision||null)!==(body.revision||null))return null;const saved={values:body.values,webapps:body.webapps??current?.webapps??[],menuOrder:body.menuOrder??current?.menuOrder,revision:randomUUID()};db.set('content',structuredClone(saved));return saved;}});
   let cookie='',confirmResult=true;
   const origin='https://hansol-97l.pages.dev';
   const thumbnail='data:image/jpeg;base64,'+readFileSync(new URL('./test-thumbnail.jpg',import.meta.url)).toString('base64');
@@ -33,7 +33,7 @@ test('single public editor, password gate, all-in-one history and webapp editing
     await until(()=>document.querySelector('#admin-message').textContent.includes('올바르지'));
     assert.equal(document.querySelector('#editor-view').hidden,true);
     document.querySelector('#admin-password').value='test-only-admin-password-2026';document.querySelector('#login-form').requestSubmit();await until(()=>!document.querySelector('#editor-view').hidden);
-    assert.equal(document.querySelectorAll('.manager-section').length,10);
+    assert.equal(document.querySelectorAll('.manager-section').length,11);
     assert.ok(document.querySelector('#lessons .lesson-empty'));
     assert.ok(document.querySelector('#lesson-upload-form input[name=thumbnail]'));
     edit('소속 학교·직함','새학교 교사');edit('소개 문구','검증용 소개');
@@ -47,13 +47,16 @@ test('single public editor, password gate, all-in-one history and webapp editing
     edit('웹앱 제목','공유 수업 도구',apps);edit('웹앱 링크','https://example.com/tool',apps);
     const file=apps.querySelector('input[type=file]');Object.defineProperty(file,'files',{value:[new dom.window.File(['image'],'test.jpg',{type:'image/jpeg'})]});file.dispatchEvent(new dom.window.Event('change'));
     await until(()=>apps.querySelector('.manager-thumbnail').src===thumbnail);
+    const menu=[...document.querySelectorAll('#editor-fields .manager-section')].find(section=>section.querySelector('summary').textContent.startsWith('메뉴 출력 순서'));menu.open=true;const lessonsRow=[...menu.querySelectorAll('.menu-order-item')].find(row=>row.textContent.includes('수업 아이디어 자료실'));lessonsRow.querySelector('button[aria-label*="위로 이동"]').click();
     document.querySelector('#editor-form').requestSubmit();await until(()=>document.querySelector('#admin-message').textContent.includes('전체 내용을 저장했습니다'));
     assert.ok(document.querySelector('.name span').textContent.includes('새학교 교사'));
     assert.equal(document.querySelector('.intro').textContent,'검증용 소개');
     assert.equal(document.querySelectorAll('.featured .feature').length,3);assert.equal(document.querySelector('.feature h3').textContent,'수정한 전문가 활동');
     assert.equal(document.querySelectorAll('.detail-grid > div:last-child .row').length,1);
     assert.equal(document.querySelector('#webapp-grid h3').textContent,'공유 수업 도구');
-    const saved=db.get('content');assert.equal(JSON.parse(saved.values.e900).length,3);assert.equal(saved.values.e1,'검증용 소개');assert.equal(saved.webapps[0].thumbnail,thumbnail);
+    const saved=db.get('content');assert.equal(JSON.parse(saved.values.e900).length,3);assert.equal(saved.values.e1,'검증용 소개');assert.equal(saved.webapps[0].thumbnail,thumbnail);assert.deepEqual(saved.menuOrder,['about','project','contact','lessons','webapps']);
+    assert.deepEqual([...document.querySelectorAll('main>section')].map(section=>section.id||'feedback'),['about','project','contact','lessons','webapps','feedback']);
+    assert.equal(document.querySelector('.navlinks a:nth-child(4)').hash,'#lessons');
     edit('소속 학교·직함','저장하지 않은 학교');confirmResult=false;document.querySelector('.close-dialog').click();assert.equal(document.querySelector('#admin-dialog').open,true);
     confirmResult=true;document.querySelector('.close-dialog').click();assert.equal(document.querySelector('#admin-dialog').open,false);assert.ok(!document.querySelector('.name span').textContent.includes('저장하지 않은 학교'));
     document.querySelector('#admin-open').click();assert.equal(document.querySelector('#editor-view').hidden,true);
@@ -61,6 +64,7 @@ test('single public editor, password gate, all-in-one history and webapp editing
     assert.equal(document.querySelectorAll('.manager-section')[1].querySelectorAll('.manager-card').length,3);
     assert.equal(document.querySelectorAll('.manager-section')[4].querySelectorAll('.manager-card').length,1);
     assert.equal(document.querySelectorAll('.manager-section')[7].querySelectorAll('.manager-card').length,1);
+    assert.ok(document.querySelectorAll('.manager-section')[9].textContent.includes('4. 수업 아이디어 자료실'));
     assert.equal(document.querySelector('.manager-field input').value,'새학교 교사');
   }finally{dom.window.close();}
 });

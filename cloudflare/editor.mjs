@@ -14,6 +14,8 @@ async function correctPassword(password,authConfig){
 }
 function validValues(values){return values&&typeof values==='object'&&!Array.isArray(values)&&Object.keys(values).length<=150&&Object.entries(values).every(([id,value])=>/^e\d{1,3}$/.test(id)&&typeof value==='string'&&value.length<=3000);}
 function validApps(apps){return Array.isArray(apps)&&apps.length<=30&&JSON.stringify(apps).length<=380000&&new Set(apps.map(app=>app?.id)).size===apps.length&&apps.every(app=>app&&typeof app.id==='string'&&app.id.length>0&&app.id.length<=100&&typeof app.title==='string'&&app.title.trim().length>0&&app.title.length<=120&&typeof app.url==='string'&&app.url.length<=2000&&(()=>{try{return ['https:','http:'].includes(new URL(app.url).protocol);}catch{return false;}})()&&typeof app.thumbnail==='string'&&app.thumbnail.length<=80000&&/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(app.thumbnail));}
+const MENU_IDS=['about','project','contact','webapps','lessons'];
+function validMenuOrder(order){return Array.isArray(order)&&order.length===MENU_IDS.length&&new Set(order).size===order.length&&MENU_IDS.every(id=>order.includes(id));}
 const LESSON_FILE_LIMIT=25*1024*1024;
 const THUMBNAIL_LIMIT=5*1024*1024;
 const MAX_ATTACHMENTS=5;
@@ -164,7 +166,7 @@ export function createEditor(store,authConfig={},fileStore=null){
       if(action==='logout'&&request.method==='POST'){if(sessionKey)await store.delete(sessionKey);return json({authenticated:false},200,{'Set-Cookie':cookie('',0)});}
       if(action==='save'&&request.method==='POST'){
         if(!authenticated)return json({error:'로그인이 만료되었습니다. 비밀번호를 다시 입력해주세요.'},401);
-        if(!validValues(body.values)||(body.webapps!==undefined&&!validApps(body.webapps)))return json({error:'제목, 링크 또는 이미지 형식이 올바르지 않습니다.'},400);
+        if(!validValues(body.values)||(body.webapps!==undefined&&!validApps(body.webapps))||(body.menuOrder!==undefined&&!validMenuOrder(body.menuOrder)))return json({error:'제목, 링크, 이미지 또는 메뉴 순서 형식이 올바르지 않습니다.'},400);
         const previous=await store.get('content'),saved=await store.saveContent(body);
         if(saved&&fileStore){const nextIds=new Set((saved.webapps||[]).map(app=>app.id));for(const app of previous?.webapps||[]){if(nextIds.has(app.id))continue;const key='webapp-files/'+app.id;for(const file of await store.get(key)||[])await fileStore.delete(file.key);await store.delete(key);}}
         return saved?json({revision:saved.revision,updatedAt:saved.updatedAt}):json({error:'다른 창에서 내용이 변경되었습니다. 편집창을 닫고 다시 열어주세요.'},409);
