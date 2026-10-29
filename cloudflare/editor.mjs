@@ -126,6 +126,12 @@ export function createEditor(store,authConfig={},fileStore=null){
         try{await store.set('lessons',items);}catch(error){await fileStore.delete(thumbnailKey);throw error;}if(previousKey)await fileStore.delete(previousKey);
         return json({item:items[index]});
       }
+      if(action==='lesson-reorder'&&request.method==='POST'){
+        if(!authenticated)return json({error:'관리자 로그인이 필요합니다.'},401);
+        const items=await store.get('lessons')||[],order=body.order;
+        if(!Array.isArray(order)||order.length!==items.length||new Set(order).size!==order.length||items.some(item=>!order.includes(item.id)))return json({error:'자료 순서를 다시 불러온 뒤 시도해주세요.'},400);
+        const byId=new Map(items.map(item=>[item.id,item])),sorted=order.map(id=>byId.get(id));await store.set('lessons',sorted);return json({items:sorted.map(item=>({...item,files:itemFiles(item).map(publicFile)}))});
+      }
       if(action==='lesson-update'&&request.method==='POST'){
         if(!authenticated)return json({error:'관리자 로그인이 필요합니다.'},401);
         if(!validLessonText(body.id,100,true)||!validLessonText(body.title,120,true)||!validLessonText(body.description,1000)||!validUrl(body.url||''))return json({error:'자료 제목, 설명과 웹앱 링크를 확인해주세요.'},400);
@@ -166,7 +172,7 @@ export function createEditor(store,authConfig={},fileStore=null){
       if(action==='logout'&&request.method==='POST'){if(sessionKey)await store.delete(sessionKey);return json({authenticated:false},200,{'Set-Cookie':cookie('',0)});}
       if(action==='save'&&request.method==='POST'){
         if(!authenticated)return json({error:'로그인이 만료되었습니다. 비밀번호를 다시 입력해주세요.'},401);
-        if(!validValues(body.values)||(body.webapps!==undefined&&!validApps(body.webapps))||(body.menuOrder!==undefined&&!validMenuOrder(body.menuOrder)))return json({error:'제목, 링크, 이미지 또는 메뉴 순서 형식이 올바르지 않습니다.'},400);
+        if(!validValues(body.values)||(body.webapps!==undefined&&!validApps(body.webapps))||(body.menuOrder!==undefined&&!validMenuOrder(body.menuOrder))||(body.menuOrderVersion!==undefined&&body.menuOrderVersion!==2))return json({error:'제목, 링크, 이미지 또는 메뉴 순서 형식이 올바르지 않습니다.'},400);
         const previous=await store.get('content'),saved=await store.saveContent(body);
         if(saved&&fileStore){const nextIds=new Set((saved.webapps||[]).map(app=>app.id));for(const app of previous?.webapps||[]){if(nextIds.has(app.id))continue;const key='webapp-files/'+app.id;for(const file of await store.get(key)||[])await fileStore.delete(file.key);await store.delete(key);}}
         return saved?json({revision:saved.revision,updatedAt:saved.updatedAt}):json({error:'다른 창에서 내용이 변경되었습니다. 편집창을 닫고 다시 열어주세요.'},409);

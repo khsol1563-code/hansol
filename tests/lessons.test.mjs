@@ -4,6 +4,16 @@ import {createEditor} from '../cloudflare/editor.mjs';
 import {testAuth} from './test-auth.mjs';
 
 const origin='https://example.com';
+test('lesson order can be changed only by an authenticated administrator',async()=>{
+  const data=new Map([['lessons',[{id:'first',title:'첫 자료',files:[]},{id:'second',title:'둘째 자료',files:[]}]]]);
+  const store={get:async key=>structuredClone(data.get(key)),set:async(key,value)=>data.set(key,structuredClone(value)),delete:async key=>data.delete(key)};
+  const handler=createEditor(store,testAuth),request=(body,cookie)=>new Request(origin+'/api/editor?action=lesson-reorder',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',...(cookie?{Cookie:cookie}:{})},body:JSON.stringify(body)});
+  assert.equal((await handler(request({order:['second','first']}))).status,401);
+  const login=await handler(new Request(origin+'/api/editor?action=login',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify({password:'test-only-admin-password-2026'})})),cookie=login.headers.get('set-cookie').split(';')[0];
+  assert.equal((await handler(request({order:['first']},cookie))).status,400);
+  const reordered=await handler(request({order:['second','first']},cookie));assert.equal(reordered.status,200);assert.deepEqual((await reordered.json()).items.map(item=>item.id),['second','first']);assert.deepEqual(data.get('lessons').map(item=>item.id),['second','first']);
+});
+
 test('lesson resources can be uploaded, edited, downloaded and deleted by an administrator',async()=>{
   const data=new Map(),files=new Map();
   const store={get:async key=>structuredClone(data.get(key)),set:async(key,value)=>data.set(key,structuredClone(value)),delete:async key=>data.delete(key)};
@@ -27,7 +37,7 @@ test('lesson resources can be uploaded, edited, downloaded and deleted by an adm
 
 test('lesson and webapp posts support links and up to five attachments',async()=>{
   const data=new Map(),files=new Map();
-  const store={get:async key=>structuredClone(data.get(key)),set:async(key,value)=>data.set(key,structuredClone(value)),delete:async key=>data.delete(key),saveContent:async body=>{const current=data.get('content');if((current?.revision||null)!==(body.revision||null))return null;const saved={values:body.values,webapps:body.webapps,menuOrder:body.menuOrder,revision:crypto.randomUUID()};data.set('content',structuredClone(saved));return saved;}};
+  const store={get:async key=>structuredClone(data.get(key)),set:async(key,value)=>data.set(key,structuredClone(value)),delete:async key=>data.delete(key),saveContent:async body=>{const current=data.get('content');if((current?.revision||null)!==(body.revision||null))return null;const saved={values:body.values,webapps:body.webapps,menuOrder:body.menuOrder,menuOrderVersion:body.menuOrderVersion,revision:crypto.randomUUID()};data.set('content',structuredClone(saved));return saved;}};
   const fileStore={put:async(key,body)=>files.set(key,new Uint8Array(await new Response(body).arrayBuffer())),get:async key=>files.has(key)?{body:files.get(key)}:null,delete:async key=>files.delete(key)};
   const handler=createEditor(store,testAuth,fileStore),request=(action,body,cookie)=>new Request(origin+'/api/editor?action='+action,{method:body?'POST':'GET',headers:{Origin:origin,...(body?{'Content-Type':'application/json'}:{}),...(cookie?{Cookie:cookie}:{})},body:body?JSON.stringify(body):undefined});
   const login=await handler(request('login',{password:'test-only-admin-password-2026'}));const cookie=login.headers.get('set-cookie').split(';')[0];
